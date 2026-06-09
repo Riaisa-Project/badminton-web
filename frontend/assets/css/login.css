@@ -1,0 +1,187 @@
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --blue: #2c59a3;
+      --blue-mid: #3a75d1;
+      --blue-light: #6ea2f5;
+      --blue-pale: #e6effc;
+      --gray-dark: #213962;
+      --gray-mid: #3a4b66;
+      --gray-muted: #6b736e;
+      --gray-border: #d0d5d2;
+      --gray-bg: #f4f6f5;
+      --white: #ffffff;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--gray-bg);
+      color: var(--gray-dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .auth-container {
+      background: var(--white);
+      width: 100%;
+      max-width: 400px;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      border: 1px solid var(--gray-border);
+      position: relative;
+    }
+
+    .auth-header {
+      padding: 30px 30px 20px;
+      text-align: center;
+    }
+
+    .logo-mark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0px;
+      margin-bottom: 24px;
+    }
+
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      height: 44px;
+      width: 110px;
+    }
+
+    .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--gray-dark);
+      letter-spacing: 1px;
+    }
+
+    .logo-text span {
+      color: #2c59a3;
+    }
+
+    .auth-title {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .auth-subtitle {
+      font-size: 14px;
+      color: var(--gray-muted);
+    }
+
+    .auth-form-wrap {
+      padding: 0 30px 30px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-mid);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--gray-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-pale);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: var(--blue-mid);
+    }
+
+    .auth-switch {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--gray-muted);
+    }
+
+    .auth-switch a {
+      color: var(--blue);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .auth-switch a:hover {
+      text-decoration: underline;
+    }
+
+    /* Toggle Forms */
+    #registerForm {
+      display: none;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  

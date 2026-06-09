@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOR ONG Sistem Booking Lapangan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Orbitron:wght@700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/booking.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- MOBILE BACKDROP -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-logo">
+        <div class="logo-mark">
+          <div class="logo-icon">
+            <svg viewBox="0 0 100 40" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="20" cy="20" r="12" stroke="#6ea2f5" />
+              <circle cx="20" cy="20" r="3" fill="#f29f05" stroke="none" />
+              <path d="M 40 30 V 14 L 56 26 V 10" stroke="#f29f05" />
+              <path d="M 85 12 A 12 12 0 1 0 88 20 L 76 20" stroke="#6ea2f5" />
+            </svg>
+          </div>
+          <div class="logo-text">GOR <span>BADMINTON</span></div>
+        </div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="nav-section-label" id="labelMenuUtama">Menu Utama</div>
+
+        <a class="nav-item active" href="#">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
+          Booking Lapangan
+        </a>
+        <div id="adminSidebarMenu" style="display: none;">
+          <div class="nav-section-label">Pengelolaan</div>
+          <a class="nav-item" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Data Lapangan
+          </a>
+          <a class="nav-item" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            Analitik
+          </a>
+          <a class="nav-item" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            Log Aktivitas
+          </a>
+        </div>
+        <div class="nav-section-label">Transaksi</div>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6" />
+            <line x1="2" y1="20" x2="2" y2="20" />
+          </svg>
+          Pembayaran
+          <span class="nav-badge" id="paymentNavBadge" style="display: none; background-color: var(--blue);">0</span>
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+          </svg>
+          Riwayat
+        </a>
+      </div>
+      <div class="sidebar-user">
+        <div class="user-card" style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="user-avatar">AD</div>
+            <div>
+              <div class="user-name">Admin GOR</div>
+              <div class="user-role">Pengelola</div>
+            </div>
+          </div>
+          <button id="btnLogout" class="btn btn-outline btn-sm" style="padding: 6px; border: none; color: #ef4444; background: transparent; cursor: pointer;" title="Keluar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+    <!-- MAIN -->
+    <main class="main">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="btn btn-outline btn-sm" id="mobileMenuBtn" style="display: none; padding: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="topbar-title">Sistem Booking GOR</div>
+        </div>
+        <div class="topbar-right">
+          <span class="topbar-date">Minggu, 18 Mei 2025 · 14:32 WIB</span>
+
+
+        </div>
+      </div>
+      <!-- PAGE CONTENT -->
+      <div class="page-content">
+        <!-- PAGE TABS -->
+        <div class="page-tabs">
+          <!-- fitur dihapus sesuai permintaan -->
+        </div>
+        <!-- STATS -->
+        <div class="stats-grid" data-section="analitik">
+          <div class="stat-card blue">
+            <div class="stat-icon amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z" />
+              </svg>
+            </div>
+            <div class="stat-label">Booking Hari Ini</div>
+            <div class="stat-value" id="stat-booking">0</div>
+            <div class="stat-sub" id="stat-booking-sub">-</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M2 16.1A5 5 0 015.9 20M2 12.05A9 9 0 019.95 20M2 8V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2h-6" />
+                <line x1="2" y1="20" x2="2.01" y2="20" />
+              </svg>
+            </div>
+            <div class="stat-label">Pendapatan Hari Ini</div>
+            <div class="stat-value" id="stat-revenue">Rp 0</div>
+            <div class="stat-sub" id="stat-revenue-sub">-</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <div class="stat-label">Pendapatan Bulanan</div>
+            <div class="stat-value" id="stat-revenue-monthly">Rp 0</div>
+            <div class="stat-sub" id="stat-revenue-monthly-sub">Bulan ini</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <div class="stat-label">Member Aktif</div>
+            <div class="stat-value" id="stat-member">0</div>
+            <div class="stat-sub" id="stat-member-sub">-</div>
+          </div>
+
+        </div>
+        <!-- MAIN CONTENT GRID -->
+        <div class="content-grid" data-section="booking-lapangan">
+          <!-- SCHEDULE BOARD -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Jadwal Lapangan</div>
+                <div class="card-subtitle">Real-time ketersediaan lapangan · Update otomatis</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <input type="date" id="scheduleDateInput" class="form-control" style="height: 29px; padding: 4px 2px; font-size: 13px;" value="">
+                <button class="btn btn-outline btn-sm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+                    <polyline points="1 4 1 10 7 10" />
+                    <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
+                  </svg>
+                  Refresh
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="schedule-header" style="margin-bottom: 16px; display: flex; gap: 8px;">
+                <button class="court-tab active" data-court="1">Lapangan 1</button>
+                <button class="court-tab" data-court="2">Lapangan 2</button>
+                <button class="court-tab" data-court="3">Lapangan 3</button>
+              </div>
+              <div id="landscapeSchedulesContainer" class="landscape-grid-wrap">
+                <!-- Jadwal akan di-generate via JavaScript -->
+              </div>
+              <div class="legend-row">
+                <div class="legend-item">
+                  <div class="legend-dot" style="background:#f0f0f0; border: 1px solid #ddd;"></div>
+                  Terisi / Selesai
+                </div>
+                <div class="legend-item">
+                  <div class="legend-dot" style="background:#fff8e1; border: 1px solid #ffe082;"></div>
+                  Pending (dikunci)
+                </div>
+                <div class="legend-item">
+                  <div class="legend-dot" style="background:var(--blue-pale); border: 1px solid var(--blue-mid);">
+                  </div>
+                  Member
+                </div>
+                <div class="legend-item">
+                  <div class="legend-dot" style="background:white; border: 1px solid var(--gray-border);"></div>
+                  Tersedia
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- BOOKING PANEL (MODAL) -->
+          <div class="modal-backdrop" id="bookingBackdrop"></div>
+          <div class="card booking-panel" id="bookingPanel" style="display: none;">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div class="card-title">Form Booking</div>
+                <div class="card-subtitle">Checkout & kalkulasi otomatis</div>
+              </div>
+              <button class="btn btn-outline btn-sm" id="closeBookingBtn" style="border: none; background: transparent; font-size: 20px; line-height: 1; padding: 0 8px;">&times;</button>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">Pilih Lapangan</label>
+                <select class="form-control">
+                  <option>Lapangan 1 Badminton</option>
+                  <option>Lapangan 2 Badminton</option>
+                  <option>Lapangan 3 Badminton</option>
+                </select>
+              </div>
+              <div class="form-group" style="display: none;">
+                <label class="form-label">Tanggal</label>
+                <input type="date" class="form-control" value="2025-05-18">
+              </div>
+              <div class="time-row form-group">
+                <div>
+                  <label class="form-label">Jam Mulai</label>
+                  <select class="form-control">
+                    <option>08:00</option>
+                    <option>09:00</option>
+                    <option>10:00</option>
+                    <option>11:00</option>
+                    <option>12:00</option>
+                    <option>13:00</option>
+                    <option selected>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                    <option>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
+                    <option>21:00</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Jam Selesai</label>
+                  <select class="form-control">
+                    <option>09:00</option>
+                    <option>10:00</option>
+                    <option>11:00</option>
+                    <option>12:00</option>
+                    <option>13:00</option>
+                    <option>14:00</option>
+                    <option selected>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                    <option>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
+                    <option>21:00</option>
+                    <option>22:00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Metode Pembayaran</label>
+                <select class="form-control" id="paymentMethodSelect">
+                  <option>Transfer Bank (BRI)</option>
+                  <option>Transfer Bank (SeaBank)</option>
+                  <option>QRIS</option>
+                  <option>Tunai di Kasir</option>
+                </select>
+              </div>
+              <!-- Price summary -->
+              <div class="price-summary">
+                <div class="price-row"><span>Lapangan 1 · 2 jam</span><span>Rp 100.000</span></div>
+                <div class="price-row"><span>Tarif/jam</span><span>Rp 50.000</span></div>
+                <div class="price-total">
+                  <span>Total Bayar</span>
+                  <span class="price-total-val">Rp 100.000</span>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="width:100%; justify-content:center; padding: 13px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Konfirmasi & Bayar
+              </button>
+            </div>
+          </div>
+          <!-- MEMBERSHIP MODAL -->
+          <div class="modal-backdrop" id="memberBackdrop"></div>
+          <div class="card booking-panel" id="memberPanel" style="display: none;">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div class="card-title">Booking Membership</div>
+                <div class="card-subtitle">Jadwal rutin selama 4 minggu (1 Bulan)</div>
+              </div>
+              <button class="btn btn-outline btn-sm" id="closeMemberBtn" style="border: none; background: transparent; font-size: 20px; line-height: 1; padding: 0 8px;">&times;</button>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">Pilih Lapangan</label>
+                <select class="form-control" id="memberCourtSelect">
+                  <option value="Lapangan 1">Lapangan 1 Badminton</option>
+                  <option value="Lapangan 2">Lapangan 2 Badminton</option>
+                  <option value="Lapangan 3">Lapangan 3 Badminton</option>
+                </select>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label">Tanggal Mulai</label>
+                  <input type="date" class="form-control" id="memberDateInput" style="height: 38px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label">Durasi per Minggu</label>
+                  <select class="form-control" id="memberDurationSelect">
+                    <option value="1">1 Jam</option>
+                    <option value="2">2 Jam</option>
+                    <option value="3">3 Jam</option>
+                    <option value="4">4 Jam</option>
+                  </select>
+                </div>
+              </div>
+              <div class="time-row form-group">
+                <div>
+                  <label class="form-label">Jam Mulai</label>
+                  <select class="form-control" id="memberStartTimeSelect">
+                    <option>08:00</option>
+                    <option>09:00</option>
+                    <option>10:00</option>
+                    <option>11:00</option>
+                    <option>12:00</option>
+                    <option>13:00</option>
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                    <option selected>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
+                    <option>21:00</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Jam Selesai</label>
+                  <input type="text" class="form-control" id="memberEndTimeInput" value="19:00" disabled>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Metode Pembayaran</label>
+                <select class="form-control" id="memberPaymentMethodSelect">
+                  <option>Transfer Bank (BRI)</option>
+                  <option>Transfer Bank (SeaBank)</option>
+                  <option>QRIS</option>
+                  <option>Tunai di Kasir</option>
+                </select>
+              </div>
+              <div class="price-summary">
+                <div class="price-row"><span id="memberPriceLabel">Paket Membership 1 Bulan (1 Jam/mgg)</span><span id="memberPriceVal">Rp 200.000</span></div>
+                <div class="price-row" style="color: black; font-weight: 500;"><span>Diskon Membership (5%)</span><span id="memberDiscountVal">-Rp 10.000</span></div>
+                <div class="price-total">
+                  <span>Total Bayar</span>
+                  <span class="price-total-val" id="memberPriceTotal">Rp 190.000</span>
+                </div>
+              </div>
+              <button class="btn btn-primary" id="btnConfirmMember" style="width:100%; justify-content:center; padding: 13px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Konfirmasi & Aktifkan Paket
+              </button>
+            </div>
+          </div>
+
+
+          <!-- MEMBERSHIP PACKAGES -->
+          <div class="card" style="grid-column: 1 / -1;">
+            <div class="card-header" style="margin-bottom:12px;">
+              <div>
+                <div class="card-title">Pilihan Paket Membership</div>
+                <div class="card-subtitle">Berlangganan untuk harga lebih hemat dan prioritas jadwal</div>
+              </div>
+            </div>
+            <div class="card-body" style="padding-top: 0;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                <!-- Package 1 -->
+                <div class="member-card"
+                  style="flex-direction: column; align-items: stretch; text-align: center; padding: 20px;">
+                  <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">Paket Prime 1 Bulan</div>
+                  <div style="color: var(--gray-muted); font-size: 13px; margin-bottom: 16px;">Akses bebas ke semua lapangan</div>
+                  <div style="font-size: 14px; color: var(--gray-muted); margin-bottom: -5px;">Mulai dari</div>
+                  <div style="font-size: 24px; font-weight: 800; color: var(--blue); margin-bottom: 20px;">Rp
+                    200.000<span style="font-size: 14px; color: var(--gray-muted); font-weight: 400;">/bln</span></div>
+                  <button class="btn btn-outline btn-buy-member" data-nama="Paket Prime 1 Bulan" data-harga="Rp 400.000"
+                    style="width: 100%; justify-content: center; border-color: var(--blue); color: var(--blue);">Pilih
+                    Paket</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- BOTTOM GRID -->
+        <div class="bottom-grid">
+          <!-- TRANSACTIONS TABLE -->
+          <div class="card" data-section="pembayaran">
+            <div class="card-header" style="padding-bottom: 0;">
+              <div>
+                <div class="card-title">Transaksi & Verifikasi Pembayaran</div>
+                <div class="card-subtitle">Perlu tindakan admin untuk pembayaran manual</div>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-outline btn-sm" id="btnLihatSemuaTransaksi">Lihat Semua</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th id="thDeleteCol" style="width: 40px; text-align: center;">
+                      <button id="btnToggleDeleteMode" title="Mode Hapus" style="background:none; border:none; cursor:pointer; color:var(--gray-muted);">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                      </button>
+                    </th>
+                    <th>Pemesan</th>
+                    <th>Lapangan</th>
+                    <th>Jadwal</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- RIGHT COLUMN -->
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <!-- ANALYTICS MINI -->
+            <div class="card" data-section="analitik">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Peak Hours</div>
+                  <div class="card-subtitle">Jam terpadat hari ini</div>
+                </div>
+              </div>
+              <div class="peak-chart">
+                <div class="bar-chart-wrap" id="peakChartWrap">
+                  <!-- Generated by JS -->
+                </div>
+                <div style="font-size:12px;color:var(--gray-muted);text-align:center" id="peakChartLabel">
+                  <!-- Generated by JS -->
+                </div>
+              </div>
+            </div>
+            <!-- MEMBER & REGULAR BOOKINGS -->
+            <div class="card" data-section="member">
+              <div class="card-header" style="margin-bottom:12px;">
+                <div>
+                  <div class="card-title">Data Member & Booking Reguler</div>
+                  <div class="card-subtitle">Monitoring member dan daftar booking harian yang aktif (Lunas)</div>
+                </div>
+                <button class="btn btn-outline btn-sm">Lihat Semua</button>
+              </div>
+              <div class="card-body" style="padding-top: 0;">
+                <h4 style="font-size: 14px; font-weight: 600; color: var(--gray-dark); margin-bottom: 12px; margin-top: 10px;">Member Aktif</h4>
+                <div class="scroll-fade" id="activeMemberList" style="margin-bottom: 24px; max-height: 250px;">
+                  <!-- Generated by JS -->
+                </div>
+                
+                <h4 style="font-size: 14px; font-weight: 600; color: var(--gray-dark); margin-bottom: 12px; margin-top: 16px;">Booking Reguler</h4>
+                <div class="scroll-fade" id="regularBookingList" style="max-height: 250px;">
+                  <!-- Generated by JS -->
+                </div>
+              </div>
+            </div>
+            <!-- RIWAYAT LOG -->
+            <div class="card" data-section="riwayat">
+              <div class="card-header" style="margin-bottom:12px;">
+                <div>
+                  <div class="card-title">Log Aktivitas Sistem</div>
+                  <div class="card-subtitle">Riwayat seluruh aksi user & admin</div>
+                </div>
+              </div>
+              <div class="card-body" style="padding-top: 0; max-height: 400px; overflow-y: auto;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Waktu</th>
+                      <th>User</th>
+                      <th>Aksi</th>
+                      <th>Detail</th>
+                    </tr>
+                  </thead>
+                  <tbody id="historyTableBody">
+                    <!-- Generated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+
+          </div>
+        </div>
+        <script src="./assets/js/booking.js"></script>
+
+        <link rel="stylesheet" href="./assets/css/booking.css">
+        <div class="modal-backdrop" id="receiptBackdrop"></div>
+        <div class="card booking-panel" id="receiptModal" style="display: none; padding: 0; max-width: 400px; z-index: 10000;">
+          <div class="receipt-card" style="box-shadow: none; margin: 0; transform: none; width: 100%; border-radius: 12px 12px 0 0;">
+            <div class="receipt-label">E-Struk Digital</div>
+            <div class="receipt-id" id="receiptId"></div>
+            <div class="receipt-details" id="receiptDetails"></div>
+          </div>
+          <div style="padding: 16px; background: white; border-radius: 0 0 12px 12px;">
+            <button class="btn btn-primary btn-print" onclick="window.print()" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+              Download / Print
+            </button>
+            <button class="btn btn-outline btn-close-print" id="btnCloseReceipt" style="width: 100%; justify-content: center;">Tutup</button>
+          </div>
+        </div>
+
+</body>
+</html>

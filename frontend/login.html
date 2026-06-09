@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOOKING LAPANGAN ONG — Login & Daftar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Orbitron:wght@700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/login.css">
+</head>
+
+<body>
+
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="logo-mark">
+        <div class="logo-icon">
+          <svg viewBox="0 0 100 40" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="20" cy="20" r="12" stroke="#2c59a3" />
+            <circle cx="20" cy="20" r="3" fill="#f29f05" stroke="none" />
+            <path d="M 40 30 V 14 L 56 26 V 10" stroke="#f29f05" />
+            <path d="M 85 12 A 12 12 0 1 0 88 20 L 76 20" stroke="#2c59a3" />
+          </svg>
+        </div>
+        <div class="logo-text">GOR <span>BADMINTON</span></div>
+      </div>
+      <h1 class="auth-title" id="formTitle">Selamat Datang</h1>
+      <p class="auth-subtitle" id="formSubtitle">Silakan masuk ke akun Anda</p>
+    </div>
+
+    <div class="auth-form-wrap">
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" class="fade-in" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Nama Lengkap</label>
+          <input type="text" class="form-control" placeholder="Nama Lengkap Anda" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div style="position: relative;">
+            <input type="password" id="loginPass" class="form-control" placeholder="Masukkan password" required>
+            <button type="button" class="toggle-pass" onclick="togglePassword('loginPass', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--gray-mid); padding: 0; display: flex; align-items: center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn">
+          Masuk
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" />
+          </svg>
+        </button>
+        <div class="auth-switch">
+          Belum memiliki akun? <a href="#" onclick="toggleForm('register')">Daftar sekarang</a>
+        </div>
+      </form>
+
+      <!-- REGISTER FORM -->
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label class="form-label">Nama Lengkap</label>
+          <input type="text" class="form-control" placeholder="Contoh: Budiono Siregar" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="nama@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">No. WhatsApp</label>
+          <input type="tel" class="form-control" placeholder="0812xxxxxx" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div style="position: relative;">
+            <input type="password" id="regPass" class="form-control" placeholder="Buat password (min. 6)" required minlength="6">
+            <button type="button" class="toggle-pass" onclick="togglePassword('regPass', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--gray-mid); padding: 0; display: flex; align-items: center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn">
+          Buat Akun
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="8.5" cy="7" r="4" />
+            <line x1="20" y1="8" x2="20" y2="14" />
+            <line x1="23" y1="11" x2="17" y2="11" />
+          </svg>
+        </button>
+        <div class="auth-switch">
+          Sudah terdaftar? <a href="#" onclick="toggleForm('login')">Masuk di sini</a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="./assets/js/login.js"></script>
+
+</body>
+
+</html>
