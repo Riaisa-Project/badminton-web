@@ -77,5 +77,5 @@ ON CONFLICT DO NOTHING;
 
 -- Seed Data: Admin User (Password is 'admingor')
 INSERT INTO users (name, email, phone, password, is_admin)
-VALUES ('Admin', 'admin@gor.com', '081234567890', '$2b$10$CNl6bb14yBJ..WoSLBIdX.6yYsU961tc11JbreE0ohDYWj4UbNyyO', TRUE)
+VALUES ('Admin', 'admin@gor.com', '085176987824', '$2b$10$CNl6bb14yBJ..WoSLBIdX.6yYsU961tc11JbreE0ohDYWj4UbNyyO', TRUE)
 ON CONFLICT (email) DO NOTHING;
